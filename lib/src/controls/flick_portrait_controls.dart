@@ -7,6 +7,8 @@ class FlickPortraitControls extends StatelessWidget {
       {Key? key,
       this.iconSize = 20,
       this.fontSize = 12,
+      this.imageURL = '',
+      this.contentType = 1,
       this.progressBarSettings})
       : super(key: key);
 
@@ -23,10 +25,25 @@ class FlickPortraitControls extends StatelessWidget {
   /// [FlickProgressBarSettings] settings.
   final FlickProgressBarSettings? progressBarSettings;
 
+  //Customize audio and video
+  final int contentType;
+  final String imageURL;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
+        contentType == 2
+            ? Center(
+                child: Container(
+                width: MediaQuery.of(context).size.height / 5,
+                height: MediaQuery.of(context).size.height / 5,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage("$imageURL"), fit: BoxFit.cover),
+                ),
+              ))
+            : Center(child: SizedBox()),
         Positioned.fill(
           child: FlickShowControlsAction(
             child: FlickSeekVideoAction(
@@ -52,7 +69,10 @@ class FlickPortraitControls extends StatelessWidget {
         Positioned.fill(
           child: FlickAutoHideChild(
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: EdgeInsets.only(
+                  left: 5,
+                  right: 5,
+                  bottom: MediaQuery.of(context).size.height / 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
@@ -100,9 +120,9 @@ class FlickPortraitControls extends StatelessWidget {
                       SizedBox(
                         width: iconSize / 2,
                       ),
-                      FlickFullScreenToggle(
-                        size: iconSize,
-                      ),
+                      // FlickFullScreenToggle(
+                      //   size: iconSize,
+                      // ),
                     ],
                   ),
                 ],
