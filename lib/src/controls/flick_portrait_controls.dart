@@ -36,6 +36,8 @@ class FlickPortraitControls extends StatelessWidget {
             child: FlickSeekVideoAction(
               child: Center(
                 child: FlickVideoBuffer(
+                  bufferingChild:
+                      CircularProgressIndicator(color: Colors.white),
                   child: FlickAutoHideChild(
                     showIfVideoNotInitialized: false,
                     child: FlickPlayToggle(
@@ -57,7 +59,7 @@ class FlickPortraitControls extends StatelessWidget {
           child: FlickAutoHideChild(
             child: Padding(
               padding:
-                  EdgeInsets.only(left: 5, right: 5, bottom: bottomPadding),
+                  EdgeInsets.only(left: 10, right: 10, bottom: bottomPadding),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
